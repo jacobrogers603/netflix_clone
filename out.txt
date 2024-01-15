@@ -1,0 +1,18 @@
+Folder PATH listing for volume OS
+Volume serial number is A901-A280
+C:.
+|   favicon.ico
+|   globals.css
+|   layout.tsx
+|   page.tsx
+|   
++---api
+|   \---auth
+|       |   register.ts
+|       |   
+|       \---[...nextauth]
+|               route.ts
+|               
+\---Auth
+        page.tsx
+        

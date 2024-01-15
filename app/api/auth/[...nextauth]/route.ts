@@ -50,7 +50,7 @@ const handler = NextAuth({
     ],
     // Our auth page.
     pages: {
-        signIn: '/Auth'
+        signIn: '/auth'
     },
     // Turns on needed logs and errors in terminal when developing.
     debug: process.env.NODE_ENV === 'development',

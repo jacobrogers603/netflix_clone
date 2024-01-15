@@ -24,6 +24,7 @@ const AuthPage = () => {
         password
       });
     } catch (error) {
+      console.log('no here')
       console.log(error);
     }
   }, [email, name, password]);
