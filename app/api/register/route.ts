@@ -1,20 +1,15 @@
 import bcrypt from 'bcrypt';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import prismadb from '@/lib/prismadb';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export const POST = async (req: Request) => {
 
     console.log('req.body:');
     console.log(req.body);
 
-    // We only want to allow post calls to the register route.
-    if(req.method !== 'POST') {
-        return res.status(405).end();
-    }
-
     try {
         // Define three vars extracted from req.body
-        const {email, name, password} = req.body;
+        const {email, name, password} = await req.json();
 
         // Check to see if there is already an email registered for the email provided by the user.
         const existingUser = await prismadb.user.findUnique({
@@ -24,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
 
         if(existingUser){
-            return res.status(422).json({error:'Email already registered :('})
+            return NextResponse.json({error:'Email already registered :('})
         }
 
         // Hash the user's password.
@@ -41,11 +36,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
         });
 
-        return res.status(200).json(user);
+        return NextResponse.json(user);
 
     } catch (error) {
         console.log('im in the catch');
         console.log(error);
-        return res.status(400).end(); 
+        return NextResponse.json(error);
     }
 }

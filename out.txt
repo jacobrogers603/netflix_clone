@@ -7,12 +7,12 @@ C:.
 |   page.tsx
 |   
 +---api
+|   |   register.ts
+|   |   
 |   \---auth
-|       |   register.ts
-|       |   
 |       \---[...nextauth]
 |               route.ts
 |               
-\---Auth
+\---auth
         page.tsx
         
