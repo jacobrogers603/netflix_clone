@@ -22,14 +22,17 @@ const AuthPage = () => {
 
   const login = useCallback(async () => {
     try {
-      await signIn("credentials", {
+      
+      const loginResult = await signIn("credentials", {
         email,
         password,
         redirect: false,
         callbackUrl: "/",
       });
 
-      router.push("/");
+      if(loginResult && loginResult.error === null){
+        router.push("/");
+      }
     } catch (error) {
       console.log(error);
     }
