@@ -1,11 +1,8 @@
 import bcrypt from 'bcrypt';
-import { NextRequest, NextResponse } from 'next/server';
+import {NextResponse } from 'next/server';
 import prismadb from '@/lib/prismadb';
 
 export const POST = async (req: Request) => {
-
-    console.log('req.body:');
-    console.log(req.body);
 
     try {
         // Define three vars extracted from req.body
@@ -39,7 +36,6 @@ export const POST = async (req: Request) => {
         return NextResponse.json(user);
 
     } catch (error) {
-        console.log('im in the catch');
         console.log(error);
         return NextResponse.json(error);
     }
