@@ -3,24 +3,30 @@ import { authOptions } from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import prismadb from "@/lib/prismadb";
 
-// Finds the current user?
-
 export async function GET(req: Request) {
   const session = await getServerSession(authOptions);
 
+  // Check if the user is not signed in
   if (!session?.user?.email) {
-    return new Error("Not signed in");
+    return new Response("Not signed in", { status: 401 }); // Return a 401 Unauthorized response
   }
 
   const currentUser = await prismadb.user.findUnique({
     where: {
-      email: session?.user?.email || "",
+      email: session.user.email,
     },
   });
 
+  // Check if currentUser is not found
   if (!currentUser) {
-    return new NextResponse("Not signed in");
+    return new Response("User not found", { status: 404 }); // Return a 404 Not Found response
   }
 
-  return NextResponse.json(currentUser);
+  // Return the currentUser in JSON format
+  return new Response(JSON.stringify(currentUser), {
+    status: 200, // OK status
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }
