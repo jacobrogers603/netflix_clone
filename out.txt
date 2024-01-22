@@ -1,18 +1,43 @@
-Folder PATH listing for volume OS
-Volume serial number is A901-A280
-C:.
-|   favicon.ico
-|   globals.css
-|   layout.tsx
-|   page.tsx
-|   
-+---api
-|   |   register.ts
-|   |   
-|   \---auth
-|       \---[...nextauth]
-|               route.ts
-|               
-\---auth
-        page.tsx
-        
+Excluded:  {'.vscode', '.next', 'node_modules', 'public'} 
+
+netflix_clone
+|-- .env
+|-- .eslintrc.json
+|-- .gitignore
+|-- app
+|   |-- api
+|   |   |-- auth
+|   |   |   |-- [...nextauth]
+|   |   |   |   |-- route.ts
+|   |   |-- current
+|   |   |   |-- route.ts
+|   |   |-- register
+|   |   |   |-- route.ts
+|   |-- auth
+|   |   |-- page.tsx
+|   |-- favicon.ico
+|   |-- globals.css
+|   |-- layout.tsx
+|   |-- page.tsx
+|   |-- provider.tsx
+|-- components
+|   |-- Input.tsx
+|-- global.d.ts
+|-- hooks
+|   |-- useCurrentUser.ts
+|-- lib
+|   |-- fetcher.ts
+|   |-- prismadb.ts
+|   |-- serverAuth.ts
+|-- next-env.d.ts
+|-- next.config.js
+|-- out.txt
+|-- out.txtcls
+|-- package-lock.json
+|-- package.json
+|-- postcss.config.js
+|-- prisma
+|   |-- schema.prisma
+|-- README.md
+|-- tailwind.config.js
+|-- tsconfig.json

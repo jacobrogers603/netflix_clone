@@ -6,10 +6,8 @@ import fetcher from "@/lib/fetcher";
 // to fetch it again if the data already exists. Thus we don't need redux or any state management
 // for fetching our user.
 
-const useCurrentUser = () => {
+export const useCurrentUser = () => {
     const { data, error, isLoading, mutate } = useSWR('/api/current', fetcher);
 
     return { data, error, isLoading, mutate };
 }
-
-export default useCurrentUser;
