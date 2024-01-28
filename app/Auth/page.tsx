@@ -87,8 +87,8 @@ const AuthPage = () => {
                     <span className="text-amber-400 text-bold">
                       Do not use your real Netflix login.
                     </span>
-                    Click "Create an Account" and make a new account or use
-                    email: "guest@email.com" password: "guest"
+                    Click &quot;Create an Account&quot; and make a new account or use
+                    email: &quot;guest@email.com&quot; password: &quot;guest&quot;
                   </span>
                 ) : null}
               </p>
