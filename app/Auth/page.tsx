@@ -1,31 +1,42 @@
 "use client";
 import axios from "axios";
 import Input from "@/components/Input";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import { redirect, useRouter } from "next/navigation";
 
 const AuthPage = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [variant, setVariant] = useState("login");
-
+  const router = useRouter();
   const toggleVariant = useCallback(() => {
     setVariant((currentVariant) =>
       currentVariant === "login" ? "register" : "login"
     );
   }, []);
+  const [errorMssg, setErrMssg] = useState("");
 
   const login = useCallback(async () => {
     try {
-      
       const loginResult = await signIn("credentials", {
         email,
         password,
-        callbackUrl: "/profiles",
-      });      
+        // callbackUrl: "/profiles",
+        redirect: false,
+      });
+      if (loginResult?.ok) {
+        setErrMssg("");
+        setPassword("");
+        setEmail("");
+        router.push("/profiles");
+      } else {
+        setErrMssg("Invalid login");
+
+      }
     } catch (error) {
       console.log(error);
     }
@@ -46,6 +57,20 @@ const AuthPage = () => {
     }
   }, [email, name, password, login]);
 
+  const handleKeyPress = useCallback((event: KeyboardEvent) => {
+    if (event.key === "Enter") {
+      variant === "login" ? login() : register();
+    }
+  }, [variant, login, register]);
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [handleKeyPress]);
+
   return (
     <div className="relative h-full w-full bg-no-repeat bg-center bg-fixed bg-cover bg-[url('/images/hero.jpg')]">
       <div className="bg-black w-full h-full lg:bg-opacity-50">
@@ -56,7 +81,20 @@ const AuthPage = () => {
           <div className="bg-black bg-opacity-70 px-16 py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
             <h2 className="text-white text-4xl mb-8 font-semibold">
               {variant === "login" ? "Sign In" : "Register"}
-              <p className="text-sm">Do not use your real Netflix login</p>
+              <p className="text-sky-400 text-sm">
+                {variant === "login" ? (
+                  <span>
+                    <span className="text-amber-400 text-bold">
+                      Do not use your real Netflix login.
+                    </span>
+                    Click "Create an Account" and make a new account or use
+                    email: "guest@email.com" password: "guest"
+                  </span>
+                ) : null}
+              </p>
+              <p className="text-red-600 text-sm">
+                {variant === "login" ? errorMssg : ""}
+              </p>
             </h2>
             <div className="flex flex-col gap-4">
               {variant === "register" ? (
@@ -104,7 +142,13 @@ const AuthPage = () => {
                 ? "First time using Netflix?"
                 : "Already Have an Account?"}
               <span
-                onClick={toggleVariant}
+                onClick={() => {
+                  toggleVariant();
+                  setErrMssg("");
+                  setEmail("");
+                  setPassword("");
+                  setName("");
+                }}
                 className="text-white ml-1 hover:underline cursor-pointer">
                 {variant === "login" ? "Create an Account" : "Login"}
               </span>
