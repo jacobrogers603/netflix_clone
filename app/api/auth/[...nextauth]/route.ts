@@ -1,4 +1,4 @@
-import authOptions from './options';
+import authOptions from '../../../../auth';
 
 import NextAuth from 'next-auth/next';
 import prismadb from '@/lib/prismadb';

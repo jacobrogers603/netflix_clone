@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import prismadb from '@/lib/prismadb';
-import authOptions from '../../auth/[...nextauth]/options';
+import authOptions from '../../../../auth';
 import { getServerSession } from 'next-auth';
 
 export async function GET(req: Request, { params }: { params: { movieId: string}}){
