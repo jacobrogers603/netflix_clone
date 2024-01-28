@@ -81,11 +81,11 @@ const AuthPage = () => {
           <div className="bg-black bg-opacity-70 px-16 py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
             <h2 className="text-white text-4xl mb-8 font-semibold">
               {variant === "login" ? "Sign In" : "Register"}
-              <p className="text-sky-400 text-sm">
+              <p className="mt-4 text-sky-400 text-sm">
                 {variant === "login" ? (
-                  <span>
+                  <span className="italic">
                     <span className="text-amber-400 text-bold">
-                      Do not use your real Netflix login.
+                      Do not use your real Netflix login.&nbsp;
                     </span>
                     Click &quot;Create an Account&quot; and make a new account or use
                     email: &quot;guest@email.com&quot; password: &quot;guest&quot;
