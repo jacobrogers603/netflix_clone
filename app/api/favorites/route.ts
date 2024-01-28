@@ -24,5 +24,8 @@ export async function GET(req: Request) {
         catch (error) {
             return NextResponse.json(error)
         }
+    }else {
+        // Handle the case where there is no session
+        return new Response(null, { status: 401 }); // 401 Unauthorized
     }
 }
