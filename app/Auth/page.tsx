@@ -80,8 +80,8 @@ const AuthPage = () => {
           <img src="/images/logo.png" alt="netflix logo" className="h-12" />
         </nav>
         <div className="flex justify-center">
-          <div className="bg-black bg-opacity-70 px-16 py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
-            <h2 className="text-white text-4xl mb-8 font-semibold">
+          <div className="bg-black bg-opacity-70 px-16 py-8 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
+            <h2 className="text-white text-4xl mb-4 font-semibold">
               {variant === "login" ? "Sign In" : "Register"}
               <p className="mt-4 text-sky-400 text-sm">
                 {variant === "login" ? (
@@ -143,7 +143,7 @@ const AuthPage = () => {
                 <FaGithub size={30} />
               </div>
             </div>
-            <p className="text-neutral-500 mt-12">
+            <p className="text-neutral-500 mt-8">
               {variant === "login"
                 ? "First time using Netflix?"
                 : "Already Have an Account?"}
