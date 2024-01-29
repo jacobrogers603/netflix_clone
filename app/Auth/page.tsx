@@ -35,7 +35,6 @@ const AuthPage = () => {
         router.push("/profiles");
       } else {
         setErrMssg("Invalid login");
-
       }
     } catch (error) {
       console.log(error);
@@ -57,11 +56,14 @@ const AuthPage = () => {
     }
   }, [email, name, password, login]);
 
-  const handleKeyPress = useCallback((event: KeyboardEvent) => {
-    if (event.key === "Enter") {
-      variant === "login" ? login() : register();
-    }
-  }, [variant, login, register]);
+  const handleKeyPress = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        variant === "login" ? login() : register();
+      }
+    },
+    [variant, login, register]
+  );
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyPress);
@@ -83,12 +85,8 @@ const AuthPage = () => {
               {variant === "login" ? "Sign In" : "Register"}
               <p className="mt-4 text-sky-400 text-sm">
                 {variant === "login" ? (
-                  <span className="italic">
-                    <span className="text-amber-400 text-bold">
-                      Do not use your real Netflix login.&nbsp;
-                    </span>
-                    Click &quot;Create an Account&quot; and make a new account or use
-                    email: &quot;guest@email.com&quot; password: &quot;guest&quot;
+                  <span className="text-lg text-amber-500 font-normal">
+                    Do not use your real Netflix login
                   </span>
                 ) : null}
               </p>
@@ -119,6 +117,14 @@ const AuthPage = () => {
                 type="password"
                 value={password}
               />
+              <div className="text-bold text-lg">
+                <span className="text-blue-500">Guest Email:</span>
+                <span className="text-amber-500"> guest@email.com</span>
+              </div>
+              <div className="text-bold text-lg">
+                <span className="text-blue-500">Guest Password:</span>
+                <span className="text-amber-500"> guest</span>
+              </div>
             </div>
             <button
               onClick={variant === "login" ? login : register}
