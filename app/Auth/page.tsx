@@ -117,13 +117,19 @@ const AuthPage = () => {
                 type="password"
                 value={password}
               />
-              <div className="text-bold text-lg">
-                <span className="text-blue-500">Guest Email:</span>
-                <span className="text-amber-500"> guest@email.com</span>
-              </div>
-              <div className="text-bold text-lg">
-                <span className="text-blue-500">Guest Password:</span>
-                <span className="text-amber-500"> guest</span>
+              <div>
+                {variant === "login" ? (
+                  <div className="flex flex-col">
+                    <div className="text-bold text-lg">
+                      <span className="text-blue-500">Guest Email:</span>
+                      <span className="text-amber-500"> guest@email.com</span>
+                    </div>
+                    <div className="text-bold text-lg">
+                      <span className="text-blue-500">Guest Password:</span>
+                      <span className="text-amber-500"> guest</span>
+                    </div>
+                  </div>
+                ) : null}
               </div>
             </div>
             <button
