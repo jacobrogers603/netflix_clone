@@ -52,11 +52,13 @@ export default function Home() {
     // components must return a single element. Fragments allow you to return multiple elements without
     // wrapping them in a div or other element.
     <>
+    {
       // The InfoModal component is a modal that displays information about a movie. The visible and onClose properties are
       // passed to the InfoModal component. The visible property is used to show or hide the modal. The onClose
       // property is a function that is called when the user closes the modal. The closeModal function is passed
       // to the onClose property. The closeModal function is returned from the useInfoModal hook. It's used to
       // close the modal.
+    }      
       <InfoModal visible={isOpen} onClose={closeModal}/>
       <Navbar />
       <Billboard />   
