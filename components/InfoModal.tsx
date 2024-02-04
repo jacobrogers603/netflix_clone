@@ -10,6 +10,7 @@ interface InfoModalProps {
     onClose: any;
 }
 
+// this component is a modal that shows the details of a movie or show.
 const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose}) => {
     const [isVisible, setIsVisible] = useState(!!visible);
     const {movieId} = useInfoModal();

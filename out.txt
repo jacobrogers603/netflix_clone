@@ -1,4 +1,4 @@
-Excluded:  {'.vscode', '.next', 'node_modules', 'public'} 
+Excluded:  {'node_modules', '.next', '.vscode'} 
 
 netflix_clone
 |-- .env
@@ -11,6 +11,16 @@ netflix_clone
 |   |   |   |   |-- route.ts
 |   |   |-- current
 |   |   |   |-- route.ts
+|   |   |-- favorite
+|   |   |   |-- route.ts
+|   |   |-- favorites
+|   |   |   |-- route.ts
+|   |   |-- movies
+|   |   |   |-- route.ts
+|   |   |   |-- [movieId]
+|   |   |   |   |-- route.ts
+|   |   |-- random
+|   |   |   |-- route.ts
 |   |   |-- register
 |   |   |   |-- route.ts
 |   |-- auth
@@ -19,12 +29,33 @@ netflix_clone
 |   |-- globals.css
 |   |-- layout.tsx
 |   |-- page.tsx
+|   |-- profiles
+|   |   |-- page.tsx
 |   |-- provider.tsx
+|   |-- watch
+|   |   |-- [movieId]
+|   |   |   |-- page.tsx
+|-- auth.ts
 |-- components
+|   |-- AccountMenu.tsx
+|   |-- Billboard.tsx
+|   |-- FavoriteButton.tsx
+|   |-- InfoModal.tsx
 |   |-- Input.tsx
+|   |-- MobileMenu.tsx
+|   |-- MovieCard.tsx
+|   |-- MovieList.tsx
+|   |-- Navbar.tsx
+|   |-- NavbarItem.tsx
+|   |-- PlayButton.tsx
 |-- global.d.ts
 |-- hooks
+|   |-- useBillboard.ts
 |   |-- useCurrentUser.ts
+|   |-- useFavorites.ts
+|   |-- useInfoModal.ts
+|   |-- useMovie.ts
+|   |-- useMovieList.ts
 |-- lib
 |   |-- fetcher.ts
 |   |-- prismadb.ts
@@ -32,12 +63,17 @@ netflix_clone
 |-- next-env.d.ts
 |-- next.config.js
 |-- out.txt
-|-- out.txtcls
 |-- package-lock.json
 |-- package.json
 |-- postcss.config.js
 |-- prisma
 |   |-- schema.prisma
+|-- public
+|   |-- images
+|   |   |-- default-green.png
+|   |   |-- hero.jpg
+|   |   |-- logo.png
 |-- README.md
 |-- tailwind.config.js
 |-- tsconfig.json
+|-- _redirects.txt

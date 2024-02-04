@@ -6,6 +6,7 @@ import fetcher from "@/lib/fetcher";
 // to fetch it again if the data already exists. Thus we don't need redux or any state management
 // for fetching our user.
 
+// This hook is used to fetch the current user from the server; useSWR is a function that takes two arguments: the first is the url to fetch and the second is the fetcher function; it returns an object with the data, error, isLoading, and mutate properties; the mutate property us a function that can change the data of the user
 export const useCurrentUser = () => {
     const { data, error, isLoading, mutate } = useSWR('/api/current', fetcher);
 

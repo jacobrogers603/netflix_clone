@@ -6,6 +6,7 @@ interface AccountMenuProps {
     visible?: boolean;
 }
 
+// This component is a dropdown menu that shows the user's name and a sign out button.
 const AccountMenu: React.FC<AccountMenuProps> = (props) => {
     const {data} = useCurrentUser();
     if(!props.visible){

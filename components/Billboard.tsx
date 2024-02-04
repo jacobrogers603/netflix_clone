@@ -4,6 +4,7 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 import PlayButton from "./PlayButton";
 import useInfoModal from "@/hooks/useInfoModal";
 
+// This component is the billboard that shows the featured movie or show.
 const Billboard = () => {
     const { data } = useBillboard();
     const {openModal} = useInfoModal(); 

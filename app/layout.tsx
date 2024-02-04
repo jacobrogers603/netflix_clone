@@ -1,3 +1,5 @@
+// This file is the layout for the entire app. It wraps the entire app in a Provider component. The Provider component is a custom component that I created. It's used to provide the user's session to the entire app. 
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -17,6 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      // The Provider component is a custom component that I created. It's used to provide the user's session to the entire app.
       <Provider>
         <body className={inter.className}>{children}</body>
       </Provider>

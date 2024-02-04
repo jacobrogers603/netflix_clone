@@ -1,3 +1,8 @@
+// This file is responsible for the watch page.
+// It plays the video of the movie that the user has selected.
+// In the file structure, it is located in the app/watch/[movieId] folder.
+// The [movieId] part of the file name is a dynamic route which means the route will include the movieId as a parameter to know which movie to play.
+
 'use client';
 import useMovie from '@/hooks/useMovie';
 import { useSession } from 'next-auth/react';

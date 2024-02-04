@@ -1,48 +1,84 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// This file is a Prisma schema file. It is used to define the data model for your application. Learn more at https://pris.ly/d/prisma-schema
 
+// This means we are using prisma-client-js as the provider for our client.
 generator client {
   provider = "prisma-client-js"
 }
 
+// This is the datasource block. It specifies the connection to your database.
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
+// This is the data model for your application. It defines the shape and structure of the data. The User model below defines a User type with an id, name, email, and other fields. Most of the fields in the User model are for google and github oauth.
 model User {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId // This id is always required for every model. It is used to uniquely identify a record in the database.
   name String
+  // String that stores profile picture url
   image String?
+  // email is a string that is used to store the email of a user. It is also used to uniquely identify a user.
   email String? @unique
+  // emailVerified is a DateTime that is used to store the date and time when the email of a user was verified.
   emailVerified DateTime?
+  // Stores their hashed password
+  // a: This is gotten via bcrypt. When a user signs up with an email and password, the password is hashed using bcrypt and stored in the database.
   hashedPassword String?
+  // createdAt is a DateTime that is used to store the date and time when a user was created.
   createdAt DateTime @default(now())
+  // updatedAt is a DateTime that is used to store the date and time when a user was last updated.
+  // Updated means that any field in the user model was updated. We do not have that in our app.
+  // We still have it because it is a good practice to have it.
   updatedAt DateTime @updatedAt
+  // favoriteIds is an array of strings that is used to store the ids of the movies that a user has favorited.
   favoriteIds String[] @db.ObjectId
+  // sessions Session[] is an array of Session objects. It is used to store the sessions of a user.
+  // The user can have multiple sessions because the user can be logged in from multiple devices.
   sessions Session[]
+  // accounts Account[] is an array of Account objects. It is used to store the oauth details of a user.
+  // It is an array beacuse a user can have multiple oauth.
+  // q: how?
+  // a: A user can sign in with google and github. This means that a user can have multiple oauth accounts.
+  // q: how would we accociate two different oauth accounts to the same user?
+  // a: We would use the userId field in the Account model to associate the oauth account with the user.
+  // This may not be possible in our app but it is a good practice to have it.
   accounts Account[]
 }
 
+// This is the Account model. It is used to store the oauth details of a user.
 model Account {
   id String @id @default(auto()) @map("_id") @db.ObjectId
+  // userID is a string that has @db.ObjectId. This means that the userID field is a string that is stored as an ObjectId in the database.
+  // A objectId is a unique identifier that is used to uniquely identify a record in the database.
   userId String @db.ObjectId
+  // Type could be an oAuth or email.
   type String 
+  // provider is a string that is used to store the name of the oauth provider. It could be google or github. If it is an email, it will be null.
   provider String
+  // providerAccountId is a string that is used to store the id of the user in the oauth provider. It is used to uniquely identify a user in the oauth provider.
   providerAccountId String
+  // refresh_token, access_token, expires_at, token_type, scope, id_token, and session_state are all strings that are used to store the oauth details of a user.
   refresh_token String? @db.String
   access_token String? @db.String
   expires_at Int?
   token_type String?
   scope String?
   id_token String? @db.String
+  // session_state is a string that is used to store the session state of a user. 
+  // A session state is a string that is used to maintain the state of a user's session. It is used to prevent CSRF attacks.
+  // It is needed for the oauth flow. It is used to verify that the user who initiated the oauth flow is the same user who completed the oauth flow.
   session_state String?
 
+ // This is a relation. It is used to define the relationship between the Account model and the User model. It is used to specify that an account belongs to a user.
+ // The syntax is @relation(fields: [userId], references: [id]). This means that the userId field in the Account model references the id field in the User model.
+ // The onDelete: Cascade option means that when a user is deleted, all the accounts associated with the user will also be deleted.
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  // This is a unique constraint. It is used to specify that the combination of the provider and providerAccountId fields should be unique.
   @@unique([provider, providerAccountId])
 }
 
+// This is the Session model. It is used to store the session details of a user.
 model Session {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   sessionToken String @unique
@@ -52,15 +88,25 @@ model Session {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+// This is the VerificationToken model. It is used to store the verification token details of a user.
+// A verification token is used to verify the email of a user.
 model VerificationToken {
   id String @id @default(auto()) @map("_id") @db.ObjectId
+  // an identifier is a string that is used to uniquely identify a verification token.
   identifier String
+  // This is the token itself
   token String @unique
+  // Taokes expire after a certain period of time sometimes.
+  // q: what determines the expiration time?
+  // a: The expiration time is determined by the application. It is usually set to a certain period of time after the token is created.
+  // we did not set it in our app but it is a good practice to have it.  
   expires DateTime
 
+  // This is a relation. It is used to specify that a verification token belongs to a user.
   @@unique([identifier, token])
 }
 
+// This is the Movie model. It is used to store the details of a movie.
 model Movie {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   title String

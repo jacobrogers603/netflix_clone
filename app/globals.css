@@ -1,3 +1,4 @@
+/* a: This file is for global styles that are applied to the entire application. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
